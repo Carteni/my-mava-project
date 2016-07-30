@@ -1,4 +1,4 @@
-<project name="name-of-project" default="quick-build">
+<project name="Mava" default="quick-build">
   <!--  By default, we assume all tools to be on the $PATH  -->
   <property name="pdepend" value="pdepend"/>
   <property name="phpcpd" value="phpcpd"/>
@@ -27,19 +27,19 @@
     </parallel>
   </target>
   <target name="clean" unless="clean.done" description="Cleanup build artifacts">
-    <delete dir="${basedir}/build/api"/>
-    <delete dir="${basedir}/build/coverage"/>
-    <delete dir="${basedir}/build/logs"/>
-    <delete dir="${basedir}/build/pdepend"/>
-    <delete dir="${basedir}/build/phpdox"/>
+    <delete dir="${basedir}/app/build/api"/>
+    <delete dir="${basedir}/app/build/coverage"/>
+    <delete dir="${basedir}/app/build/logs"/>
+    <delete dir="${basedir}/app/build/pdepend"/>
+    <delete dir="${basedir}/app/build/phpdox"/>
     <property name="clean.done" value="true"/>
   </target>
   <target name="prepare" unless="prepare.done" depends="clean" description="Prepare for build">
-    <mkdir dir="${basedir}/build/api"/>
-    <mkdir dir="${basedir}/build/coverage"/>
-    <mkdir dir="${basedir}/build/logs"/>
-    <mkdir dir="${basedir}/build/pdepend"/>
-    <mkdir dir="${basedir}/build/phpdox"/>
+    <mkdir dir="${basedir}/app/build/api"/>
+    <mkdir dir="${basedir}/app/build/coverage"/>
+    <mkdir dir="${basedir}/app/build/logs"/>
+    <mkdir dir="${basedir}/app/build/pdepend"/>
+    <mkdir dir="${basedir}/app/build/phpdox"/>
     <property name="prepare.done" value="true"/>
   </target>
   <target name="composer" description="Installing composer dependencies">
@@ -73,9 +73,9 @@
     <exec executable="${phploc}" taskname="phploc">
       <arg value="--count-tests"/>
       <arg value="--log-csv"/>
-      <arg path="${basedir}/build/logs/phploc.csv"/>
+      <arg path="${basedir}/app/build/logs/phploc.csv"/>
       <arg value="--log-xml"/>
-      <arg path="${basedir}/build/logs/phploc.xml"/>
+      <arg path="${basedir}/app/build/logs/phploc.xml"/>
       <arg path="${basedir}/src"/>
       <arg path="${basedir}/tests"/>
     </exec>
@@ -83,9 +83,9 @@
   </target>
   <target name="pdepend" unless="pdepend.done" depends="prepare" description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
     <exec executable="${pdepend}" taskname="pdepend">
-      <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
-      <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg"/>
-      <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg"/>
+      <arg value="--jdepend-xml=${basedir}/app/build/logs/jdepend.xml"/>
+      <arg value="--jdepend-chart=${basedir}/app/build/pdepend/dependencies.svg"/>
+      <arg value="--overview-pyramid=${basedir}/app/build/pdepend/overview-pyramid.svg"/>
       <arg path="${basedir}/src"/>
     </exec>
     <property name="pdepend.done" value="true"/>
@@ -94,7 +94,7 @@
     <exec executable="${phpmd}" taskname="phpmd">
       <arg path="${basedir}/src"/>
       <arg value="text"/>
-      <arg path="${basedir}/build/phpmd.xml"/>
+      <arg path="${basedir}/app/build/phpmd.xml"/>
     </exec>
     <property name="phpmd.done" value="true"/>
   </target>
@@ -102,9 +102,9 @@
     <exec executable="${phpmd}" taskname="phpmd">
       <arg path="${basedir}/src"/>
       <arg value="xml"/>
-      <arg path="${basedir}/build/phpmd.xml"/>
+      <arg path="${basedir}/app/build/phpmd.xml"/>
       <arg value="--reportfile"/>
-      <arg path="${basedir}/build/logs/pmd.xml"/>
+      <arg path="${basedir}/app/build/logs/pmd.xml"/>
     </exec>
     <property name="phpmd.done" value="true"/>
   </target>
@@ -121,7 +121,7 @@
   <target name="phpcs-ci" unless="phpcs.done" depends="prepare" description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
     <exec executable="${phpcs}" output="/dev/null" taskname="phpcs">
       <arg value="--report=checkstyle"/>
-      <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
+      <arg value="--report-file=${basedir}/app/build/logs/checkstyle.xml"/>
       <arg value="--standard=PSR2"/>
       <arg value="--extensions=php"/>
       <arg value="--ignore=autoload.php"/>
@@ -139,7 +139,7 @@
   <target name="phpcpd-ci" unless="phpcpd.done" depends="prepare" description="Find duplicate code using PHPCPD and log result in XML format. Intended for usage within a continuous integration environment.">
     <exec executable="${phpcpd}" taskname="phpcpd">
       <arg value="--log-pmd"/>
-      <arg path="${basedir}/build/logs/pmd-cpd.xml"/>
+      <arg path="${basedir}/app/build/logs/pmd-cpd.xml"/>
       <arg path="${basedir}/src"/>
     </exec>
     <property name="phpcpd.done" value="true"/>
@@ -154,13 +154,13 @@
   <target name="phpunit-no-coverage" unless="phpunit.done" depends="prepare" description="Run unit tests with PHPUnit (without generating code coverage reports)">
     <exec executable="${phpunit}" failonerror="true" taskname="phpunit">
       <arg value="--configuration"/>
-      <arg path="${basedir}/build/phpunit.xml"/>
+      <arg path="${basedir}/phpunit.xml"/>
       <arg value="--no-coverage"/>
     </exec>
     <property name="phpunit.done" value="true"/>
   </target>
   <target name="phpdox" unless="phpdox.done" depends="phploc-ci,phpcs-ci,phpmd-ci" description="Generate project documentation using phpDox">
-    <exec executable="${phpdox}" dir="${basedir}/build" taskname="phpdox"/>
+    <exec executable="${phpdox}" dir="${basedir}/app/build" taskname="phpdox"/>
     <property name="phpdox.done" value="true"/>
   </target>
   <target name="-check-failure">
