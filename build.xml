@@ -1,4 +1,4 @@
-<project name="Mava" default="full-build">
+<project name="Mava Project" default="full-build">
   <!--  By default, we assume all tools to be on the $PATH  -->
   <property name="pdepend" value="pdepend"/>
   <property name="phpcpd" value="phpcpd"/>
