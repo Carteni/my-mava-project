@@ -31,11 +31,11 @@ class DefaultControllerTest extends WebTestCase
           $crawler->filter('#container h1')->text());
     }
 
-    public function testAboutPage()
+    /*public function testAboutPage()
     {
         $crawler = $this->client->request('GET', '/about/jack/');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('Jack', $this->client->getResponse()->getContent());
-    }
+    }*/
 }
