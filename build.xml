@@ -7,15 +7,15 @@
   <property name="phploc" value="phploc"/>
   <property name="phpmd" value="phpmd"/>
   <property name="phpunit" value="phpunit"/>
-  <target name="full-build" depends="prepare,static-analysis,phpunit,phpdox,-check-failure" description="Performs static analysis, runs the tests, and generates project documentation"/>
-  <target name="full-build-parallel" depends="prepare,static-analysis-parallel,phpunit,phpdox,-check-failure" description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation"/>
-  <target name="quick-build" depends="prepare,lint,phpunit-no-coverage" description="Performs a lint check and runs the tests (without generating code coverage reports)"/>
+  <target name="full-build" depends="prepare,composer,static-analysis,phpunit,phpdox,-check-failure" description="Performs static analysis, runs the tests, and generates project documentation"/>
+  <target name="full-build-parallel" depends="prepare,composer,static-analysis-parallel,phpunit,phpdox,-check-failure" description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation"/>
+  <target name="quick-build" depends="prepare,composer,lint,phpunit-no-coverage" description="Performs a lint check and runs the tests (without generating code coverage reports)"/>
   <target name="static-analysis" depends="lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci" description="Performs static analysis"/>
   <!--
    Adjust the threadCount attribute's value to the number of CPUs
   -->
   <target name="static-analysis-parallel" description="Performs static analysis (executing the tools in parallel)">
-    <parallel threadCount="2">
+    <parallel threadCount="1">
       <sequential>
         <antcall target="pdepend"/>
         <antcall target="phpmd-ci"/>
@@ -41,6 +41,11 @@
     <mkdir dir="${basedir}/build/pdepend"/>
     <mkdir dir="${basedir}/build/phpdox"/>
     <property name="prepare.done" value="true"/>
+  </target>
+  <target name="composer" description="Installing composer dependencies">
+    <exec executable="composer" failonerror="true">
+      <arg value="install" />
+    </exec>
   </target>
   <target name="lint" unless="lint.done" description="Perform syntax check of sourcecode files">
     <apply executable="php" taskname="lint">
