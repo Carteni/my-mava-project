@@ -1,4 +1,4 @@
-<project name="name-of-project" default="full-build">
+<project name="name-of-project" default="quick-build">
   <!--  By default, we assume all tools to be on the $PATH  -->
   <property name="pdepend" value="pdepend"/>
   <property name="phpcpd" value="phpcpd"/>
@@ -7,7 +7,7 @@
   <property name="phploc" value="phploc"/>
   <property name="phpmd" value="phpmd"/>
   <property name="phpunit" value="phpunit"/>
-  <target name="full-build" depends="prepare,composer,static-analysis,phpunit-no-coverage,phpdox,-check-failure" description="Performs static analysis, runs the tests, and generates project documentation"/>
+  <target name="full-build" depends="prepare,composer,static-analysis,phpunit,phpdox,-check-failure" description="Performs static analysis, runs the tests, and generates project documentation"/>
   <target name="full-build-parallel" depends="prepare,composer,static-analysis-parallel,phpunit,phpdox,-check-failure" description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation"/>
   <target name="quick-build" depends="prepare,composer,lint,phpunit-no-coverage" description="Performs a lint check and runs the tests (without generating code coverage reports)"/>
   <target name="static-analysis" depends="lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci" description="Performs static analysis"/>
