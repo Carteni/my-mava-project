@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings load_method="PHPUNIT_PHAR" custom_loader_path="C:/wamp/vhosts/multimediaexperiencestudio.it/public_html/symfony-app1/app/autoload.php" phpunit_phar_path="C:/bin/phpunit.phar" />
+      <phpunit_by_interpreter interpreter_id="a5d737ea-81e2-4a5d-9f37-9ee9da621f59" interpreter_name="Remote PHP 7 - Ubuntu14.04-PHP7.0.6-Apache-Symfony" load_method="PHPUNIT_PHAR" configuration_file_path="/var/www/mava/phpunit.xml.dist" custom_loader_path="/vagrant/workspace/mava/app/autoload.php" phpunit_phar_path="/usr/local/bin/phpunit" use_configuration_file="true" />
+    </phpunit_settings>
+  </component>
 </project>

@@ -46,10 +46,16 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
+          <root url="phar://C:/bin/phpunit.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
+          <root url="phar://C:/bin/composer.phar/" />
+          <root url="phar://C:/bin/phpunit-skelgen.phar/" />
         </CLASSES>
         <SOURCES>
+          <root url="phar://C:/bin/phpunit.phar/" />
           <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
+          <root url="phar://C:/bin/composer.phar/" />
+          <root url="phar://C:/bin/phpunit-skelgen.phar/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -92,6 +98,7 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" />
           <root url="file://$MODULE_DIR$/vendor/symfony/symfony" />
           <root url="file://$MODULE_DIR$/vendor/twig/twig" />
+          <root url="file://C:/bin" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/composer" />
@@ -130,6 +137,7 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" />
           <root url="file://$MODULE_DIR$/vendor/symfony/symfony" />
           <root url="file://$MODULE_DIR$/vendor/twig/twig" />
+          <root url="file://C:/bin" />
         </SOURCES>
       </library>
     </orderEntry>
