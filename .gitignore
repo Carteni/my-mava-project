@@ -13,7 +13,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-geckodriver.exe
-selenium-server-standalone-3.0.0-beta1.jar
 
 tests/_output/*
