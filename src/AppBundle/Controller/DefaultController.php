@@ -22,7 +22,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/about/{name}/", name="aboutpage", defaults={"name":null})
+     * @Route("/about/{name}", name="aboutpage", defaults={"name":null})
      * @param $name
      * @return Response
      */
@@ -37,7 +37,25 @@ class DefaultController extends Controller
         }
 
         return $this->render(':default:about.html.twig',[
-            'user' => $user
+            'user' => $user ?? null
+        ]);
+    }
+
+    /**
+     * @Route("/about/{name}/details", name="aboutdetailspage")
+     * @param $name
+     * @return Response
+     */
+    public  function aboutDetailtsAction($name)
+    {
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')
+          ->findOneBy(array('name'=>$name));
+        if(false === $user instanceof User) {
+            throw $this->createNotFoundException(sprintf('No user named %s found', $name));
+        }
+
+        return $this->render(':default:more.html.twig',[
+          'user' => $user
         ]);
     }
 }

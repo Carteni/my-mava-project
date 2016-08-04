@@ -1,0 +1,10 @@
+# /var/www/mava/behat.yml
+default:
+  extensions:
+    Behat\Symfony2Extension: ~
+    Behat\MinkExtension:
+      goutte: ~
+      javascript_session: selenium2
+      base_url: http://10.10.10.10:8000/
+      browser_name: firefox
+      selenium2: ~

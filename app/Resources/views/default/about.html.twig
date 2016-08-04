@@ -5,10 +5,11 @@
     {% if user %}
         <h1>User Profile</h1>
         <strong>Name: </strong>{{user.name}} <br/>
-        <strong>email: </strong>{{user.email}} <br/>
-        <strong>Bio: </strong>{{user.bio}} <br/>
+        <button type="button"
+                onclick="location.href='{{ path('aboutdetailspage', {'name':user.name}) }}'">
+            more</button>
     {% else %}
-        mava is a web app for task management and team collaboration. <br/>
+        Mava is a web app for task management and team collaboration. <br/>
     {% endif %}
 
 {% endblock %}
