@@ -1,9 +1,22 @@
 # Codeception Test Suite Configuration
 #
 # Suite for unit (internal) tests.
+#
+# https://github.com/Codeception/Codeception/tree/2.2/docs/modules
+# http://codeception.com/docs/modules/Doctrine2
+#
+# 4 spaces for tabs.
+
 
 class_name: UnitTester
 modules:
     enabled:
         - Asserts
         - \Helper\Unit
+        - Db
+        - Symfony:
+            app_path: 'app'
+            var_path: 'var'
+            environment: 'test'
+        - Doctrine2:
+            depends: Symfony
