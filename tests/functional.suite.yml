@@ -8,7 +8,7 @@ class_name: FunctionalTester
 modules:
     enabled:
         # add framework module here
-        - Symfony2:
+        - Symfony:
             app_path: 'app'
             var_path: 'var'
             environment: 'test'
