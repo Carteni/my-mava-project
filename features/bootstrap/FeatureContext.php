@@ -28,4 +28,44 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
 
     //throw new \Behat\Behat\Tester\Exception\PendingException();
   }
+
+  /**
+   * @Given I am logged in as admin
+   */
+  public function iAmLoggedInAsAdmin()
+  {
+    throw new \Behat\Behat\Tester\Exception\PendingException();
+  }
+
+  /**
+   * @Given There are :arg1 workspaces
+   */
+  public function thereAreWorkspaces($arg1)
+  {
+    throw new \Behat\Behat\Tester\Exception\PendingException();
+  }
+
+  /**
+   * @When I click on :arg1
+   */
+  public function iClickOn($arg1)
+  {
+    throw new \Behat\Behat\Tester\Exception\PendingException();
+  }
+
+  /**
+   * @Then I should see :arg1 items in the table
+   */
+  public function iShouldSeeItemsInTheTable($arg1)
+  {
+    throw new \Behat\Behat\Tester\Exception\PendingException();
+  }
+
+  /**
+   * @When I fill the :arg1 with :arg2
+   */
+  public function iFillTheWith($arg1, $arg2)
+  {
+    throw new \Behat\Behat\Tester\Exception\PendingException();
+  }
 }
