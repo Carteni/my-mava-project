@@ -1,4 +1,5 @@
-<project name="Mava Project" default="codeception-quick-build">
+<?xml version="1.0"?>
+<project name="Mava Project" default="integration-test">
   <!--  By default, we assume all tools to be on the $PATH  -->
   <property name="pdepend" value="pdepend"/>
   <property name="phpcpd" value="phpcpd"/>
@@ -9,22 +10,48 @@
   <property name="phpunit" value="phpunit"/>
 
   <!-- Target -->
-  <target name="codeception-quick-build" depends="prepare,composer,lint,codeception" description="Performs static analysis, runs the tests, and generates project documentation"/>
-  <target name="codeception-full-build" depends="prepare,composer,static-analysis,codeception,phpdox" description="Performs static analysis, runs the tests, and generates project documentation"/>
+  <target name="codeception-quick-build" depends="prepare,composer,lint,integration-test" description="Performs static analysis, runs the tests, and generates project documentation"/>
+  <target name="codeception-full-build" depends="prepare,composer,static-analysis,integration-test,phpdox" description="Performs static analysis, runs the tests, and generates project documentation"/>
   <target name="full-build" depends="prepare,composer,static-analysis,phpunit,phpdox,-check-failure" description="Performs static analysis, runs the tests, and generates project documentation"/>
   <target name="full-build-parallel" depends="prepare,composer,static-analysis-parallel,phpunit,phpdox,-check-failure" description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation"/>
   <target name="quick-build" depends="prepare,composer,lint,phpunit-no-coverage" description="Performs a lint check and runs the tests (without generating code coverage reports)"/>
   <target name="static-analysis" depends="lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci" description="Performs static analysis"/>
 
   <!-- https://github.com/ThePeach/CodeCeption-Ant/blob/master/README.md -->
+  <target name="integration-test">
+    <parallel failonany="true">
+      <sequential>
+        <exec executable="/bin/bash">
+          <arg value="${basedir}/selenium.sh" />
+        </exec>
+      </sequential>
+      <sequential>
+        <waitfor maxwait="1" maxwaitunit="minute">
+          <socket server="localhost" port="4444" />
+        </waitfor>
+        <antcall target="codeception"/>
+        <antcall target="-codecept-failure"/>
+      </sequential>
+    </parallel>
+  </target>
   <target name="codeception-clean">
     <delete dir="${basedir}/tests/_output" includes="**/*" />
+    <echo message="Codeception clean" />
   </target>
   <target name="codeception" unless="codeception.done" depends="codeception-clean" description="Run unit tests with Codeception">
     <exec executable="php" resultproperty="result.codeception" taskname="codeception" failonerror="true">
-      <arg line="${basedir}/vendor/bin/codecept run --report --xml" />
+      <arg line="${basedir}/vendor/bin/codecept run" />
     </exec>
     <property name="codeception.done" value="true"/>
+  </target>
+  <target name="-codecept-failure">
+    <fail message="Codeception did not finish successfully">
+      <condition>
+        <not>
+          <equals arg1="${result.codeception}" arg2="0"/>
+        </not>
+      </condition>
+    </fail>
   </target>
 
   <!--
