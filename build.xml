@@ -27,7 +27,7 @@
       </sequential>
       <sequential>
         <waitfor maxwait="1" maxwaitunit="minute">
-          <socket server="localhost" port="4444" />
+          <socket server="127.0.0.1" port="4444" />
         </waitfor>
         <antcall target="codeception"/>
         <antcall target="-codecept-failure"/>

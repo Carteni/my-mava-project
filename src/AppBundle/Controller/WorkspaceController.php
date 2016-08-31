@@ -1,32 +1,128 @@
 <?php
+
 namespace AppBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class WorkspaceController extends Controller {
+use AppBundle\Entity\Workspace;
+use AppBundle\Form\WorkspaceType;
 
-  /**
-   * @Route("/workspace/{name}", name="workspace_show")
-   * @param $name
-   * @return Response
-   */
-  public function showAction($name) {
+/**
+ * Workspace controller.
+ *
+ */
+class WorkspaceController extends Controller
+{
+    /**
+     * Lists all Workspace entities.
+     *
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
 
-    $repo = $this->getDoctrine()->getRepository('AppBundle:Workspace');
-    $workspace = $repo->findOneBy(array('name' => $name));
-    $workspaceId = $workspace->getId();
+        $workspaces = $em->getRepository('AppBundle:Workspace')->findAll();
 
-    $repo = $this->getDoctrine()->getRepository('AppBundle:Project');
-    $projects = $repo->findBy(array('workspace' => $workspaceId));
-
-    if(null === $projects) {
-      throw $this->createNotFoundException('Not found!');
+        return $this->render('workspace/index.html.twig', array(
+            'workspaces' => $workspaces,
+        ));
     }
 
-    return $this->render(':workspace:show.html.twig', array(
-      'projects' => $projects
-    ));
-  }
+    /**
+     * Creates a new Workspace entity.
+     *
+     */
+    public function newAction(Request $request)
+    {
+        $workspace = new Workspace();
+        $form = $this->createForm('AppBundle\Form\WorkspaceType', $workspace);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($workspace);
+            $em->flush();
+
+            return $this->redirectToRoute('workspace_show', array('id' => $workspace->getId()));
+        }
+
+        return $this->render('workspace/new.html.twig', array(
+            'workspace' => $workspace,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a Workspace entity.
+     *
+     */
+    public function showAction(Workspace $workspace)
+    {
+        $deleteForm = $this->createDeleteForm($workspace);
+
+        return $this->render('workspace/show.html.twig', array(
+            'workspace' => $workspace,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing Workspace entity.
+     *
+     */
+    public function editAction(Request $request, Workspace $workspace)
+    {
+        $deleteForm = $this->createDeleteForm($workspace);
+        $editForm = $this->createForm('AppBundle\Form\WorkspaceType', $workspace);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($workspace);
+            $em->flush();
+
+            return $this->redirectToRoute('workspace_edit', array('id' => $workspace->getId()));
+        }
+
+        return $this->render('workspace/edit.html.twig', array(
+            'workspace' => $workspace,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Deletes a Workspace entity.
+     *
+     */
+    public function deleteAction(Request $request, Workspace $workspace)
+    {
+        $form = $this->createDeleteForm($workspace);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($workspace);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('workspace_index');
+    }
+
+    /**
+     * Creates a form to delete a Workspace entity.
+     *
+     * @param Workspace $workspace The Workspace entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Workspace $workspace)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('workspace_delete', array('id' => $workspace->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
 }

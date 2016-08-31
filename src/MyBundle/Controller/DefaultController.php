@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/my", name="mypage")
+     * @Route("/page", name="mypage")
      */
     public function indexAction()
     {
