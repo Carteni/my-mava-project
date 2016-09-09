@@ -1,5 +1,6 @@
 <?php
 
+// php vendor/bin/codecept run functional [DefaultControllerCest]
 
 class DefaultControllerCest {
   public function _before(FunctionalTester $I) {

@@ -13,4 +13,15 @@ class Unit extends \Codeception\Module {
     );
   }
 
+  /**
+   * @param \UnitTester $tester
+   */
+  public function logIn(\UnitTester $tester) {
+    $tester->amOnRoute('fos_user_security_login');
+    $tester->seeInCurrentUrl('/login');
+    $tester->fillField('_username', 'mava');
+    $tester->fillField('_password', 'pass');
+    $tester->click('_submit');
+  }
+
 }

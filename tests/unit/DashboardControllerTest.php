@@ -1,5 +1,6 @@
 <?php
 
+// php vendor/bin/codecept run unit [DashboardControllerTest]
 
 class DashboardControllerTest extends \Codeception\Test\Unit
 {
@@ -10,6 +11,7 @@ class DashboardControllerTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
+        $this->tester->logIn($this->tester);
     }
 
     protected function _after()

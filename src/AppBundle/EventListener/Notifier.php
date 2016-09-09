@@ -51,9 +51,8 @@ class Notifier {
       $this->subject = $entity->getTitle();
       $this->body = "updates for task: " . $entity->getTitle();
       $this->user = $entity->getUser();
+      $this->addNewNotification();
     }
-
-    $this->addNewNotification();
   }
 
   /**

@@ -1,5 +1,6 @@
 <?php
 
+// php vendor/bin/codecept run unit [DefaultControllerTest]
 
 class DefaultControllerTest extends \Codeception\Test\Unit
 {

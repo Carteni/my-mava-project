@@ -5,6 +5,7 @@ class DashboardControllerAcceptCest
 {
     public function _before(AcceptanceTester $I)
     {
+        $I->wantToLogin($I);
     }
 
     public function _after(AcceptanceTester $I)

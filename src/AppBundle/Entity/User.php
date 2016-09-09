@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToOne as OneToOne;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**

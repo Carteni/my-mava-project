@@ -1,35 +1,36 @@
 <?php
 
+// php vendor/bin/codecept run unit [WorkspaceControllerTest]
 
-class WorkspaceControllerTest extends \Codeception\Test\Unit
-{
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+use Codeception\Util\Stub;
 
-    protected function _before()
-    {
-    }
+class WorkspaceControllerTest extends \Codeception\Test\Unit {
+  /**
+   * @var \UnitTester
+   */
+  protected $tester;
 
-    protected function _after()
-    {
-    }
+  protected function _before() {
+    $this->tester->logIn($this->tester);
+  }
 
-    // tests
-    public function testShowAction()
-    {
-        /*$workspaceId = $this->tester->grabFromRepository(
-          'AppBundle:Workspace', 'id',
-          array('name'=>'Writing')
-        );
-        $projectTitle = $this->tester->grabFromRepository(
-          'AppBundle:Project', 'title',
-          array('workspace'=>$workspaceId)
-        );
-        $this->assertEquals('Symfony book', $projectTitle, 'no match found');*/
+  protected function _after() {
+  }
 
-        $this->tester->amOnRoute('workspace_show', array("name" => 'Writing'));
-        $this->tester->seeResponseContains('Symfony book');
-    }
+  // tests
+  public function testShowAction() {
+    /*$workspaceId = $this->tester->grabFromRepository(
+      'AppBundle:Workspace', 'id',
+      array('name'=>'Writing')
+    );
+    $projectTitle = $this->tester->grabFromRepository(
+      'AppBundle:Project', 'title',
+      array('workspace'=>$workspaceId)
+    );
+    $this->assertEquals('Symfony book', $projectTitle, 'no match found');*/
+
+    $this->tester->amOnRoute('workspace_show', array("id" => 1));
+    $this->tester->seeResponseContains('accusantium');
+
+  }
 }
