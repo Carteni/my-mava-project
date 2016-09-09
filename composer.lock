@@ -961,12 +961,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "af6bc6bf4ec303be3a82e1f64b0e6ac9e8ff00c7"
+                "reference": "528f0a93aebb641a0bc6471cc24562fbd01432cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/af6bc6bf4ec303be3a82e1f64b0e6ac9e8ff00c7",
-                "reference": "af6bc6bf4ec303be3a82e1f64b0e6ac9e8ff00c7",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/528f0a93aebb641a0bc6471cc24562fbd01432cb",
+                "reference": "528f0a93aebb641a0bc6471cc24562fbd01432cb",
                 "shasum": ""
             },
             "require": {
@@ -1025,7 +1025,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2016-09-07 09:22:55"
+            "time": "2016-09-09 10:00:40"
         },
         {
             "name": "imagine/imagine",
@@ -3231,16 +3231,16 @@
         },
         {
             "name": "sonata-project/media-bundle",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "3ca7013a5f5c1d118ba300485cba374d988f1fcf"
+                "reference": "fabd14b939267ab9ef622963f14aed1cf26caa4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/3ca7013a5f5c1d118ba300485cba374d988f1fcf",
-                "reference": "3ca7013a5f5c1d118ba300485cba374d988f1fcf",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/fabd14b939267ab9ef622963f14aed1cf26caa4c",
+                "reference": "fabd14b939267ab9ef622963f14aed1cf26caa4c",
                 "shasum": ""
             },
             "require": {
@@ -3339,7 +3339,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2016-08-18 13:04:58"
+            "time": "2016-09-08 12:49:24"
         },
         {
             "name": "sonata-project/notification-bundle",
