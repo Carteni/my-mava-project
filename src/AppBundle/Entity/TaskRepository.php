@@ -10,4 +10,13 @@ namespace AppBundle\Entity;
  */
 class TaskRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function getFinishedTasks($projectId){
+    $q = $this->createQueryBuilder('t')
+      ->where('t.project = :projectId')
+      ->andWhere('t.status = :completed')
+      ->setParameter('projectId', $projectId)
+      ->setParameter('completed', 'completed')
+      ->getQuery();
+    return $q->getResult();
+  }
 }

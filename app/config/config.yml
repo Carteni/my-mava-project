@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@MyBundle/Resources/config/services.yml" }
+    - { resource: sonata_classification.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -37,6 +38,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'SonataMediaBundle:Form:media_widgets.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -54,11 +57,18 @@ doctrine:
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #     path:     "%database_path%"
-
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+    # http://stackoverflow.com/questions/37634625/symfony-doctrine-auto-mapping-unrecognized
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+                mappings:
+                    ApplicationSonataMediaBundle: ~
+                    SonataMediaBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -74,7 +84,7 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
 
-# SonataAdmin
+# SonataAdminBundle
 sonata_admin:
     title: MAVA v1.0
     title_logo: img/mava-logo-small.png
@@ -193,6 +203,40 @@ assetic:
             inputs:
                 - '%kernel.root_dir%/Resources/public/js/jquery-2.2.2.min.js'
             output: js/jquery.js
+
+# MopaBootstrap
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
     menu: ~  # enables twig helpers for menu
+
+
+# Sonata Media Bundle
+sonata_media:
+    # if you don't use default namespace configuration
+    #class:
+        #media: Application\Sonata\MediaBundle\Entity\Media
+        #gallery: Application\Sonata\MediaBundle\Entity\Gallery
+        #gallery_has_media: Application\Sonata\MediaBundle\Entity\Media\GalleryHasMedia
+    default_context: default
+    db_driver: doctrine_orm
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                preview: { width: 100, quality: 100}
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+
+    cdn:
+        server:
+            path: /uploads/media
+
+    filesystem:
+        local:
+            directory:  "%kernel.root_dir%/../web/uploads/media"
+            create:     false

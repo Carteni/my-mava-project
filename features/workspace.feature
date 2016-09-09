@@ -1,11 +1,11 @@
 # workspace.feature
-
+@workspace
 Feature: Workspace administrator
   In order to manage workspace
   As an admin
   I am able to see, add, edit and delete workspaces in the backend
 
-  @javascript
+  #@javascript
   Scenario: seeing a list of available workspaces
     Given I am logged in as admin
     And There are 3 workspaces
@@ -13,7 +13,7 @@ Feature: Workspace administrator
     When I click on "Workspaces"
     Then I should see 3 items in the table
 
-  @javascript
+  #@javascript
   Scenario: adding a new workspace
     Given I am logged in as admin
     And I am on "/admin/workspaces"
@@ -23,7 +23,7 @@ Feature: Workspace administrator
     And I press "save"
     Then I should see "New workspace created"
 
-  @javascript
+  #@javascript
   Scenario: editing a workspace
     Given I am logged in as admin
     And I am on "/admin/workspaces"
@@ -33,7 +33,7 @@ Feature: Workspace administrator
     And I press "save"
     Then I should see "All changes are saved"
 
-  @javascript
+  #@javascript
   Scenario: deleting a workspace
     Given I am logged in as admin
     And I am on "/admin/workspaces"

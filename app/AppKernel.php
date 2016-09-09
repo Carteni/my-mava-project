@@ -31,7 +31,17 @@ class AppKernel extends Kernel
             new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
 
             new \Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
-            new \Knp\Bundle\PaginatorBundle\KnpPaginatorBundle()
+            new \Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
+            new Sonata\IntlBundle\SonataIntlBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new \Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+
+            // https://github.com/sonata-project/SonataMediaBundle/issues/783
+            // https://github.com/sonata-project/SonataClassificationBundle/blob/3.x/Resources/doc/reference/installation.rst
+            new \Sonata\ClassificationBundle\SonataClassificationBundle(),
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

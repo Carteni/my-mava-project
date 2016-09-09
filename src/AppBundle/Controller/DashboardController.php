@@ -16,8 +16,14 @@ class DashboardController extends Controller {
    * @Route("/", name="dashboard_index")
    * @return Response
    */
-  public function indexAction() {
-    return $this->render(':dashboard:index.html.twig');
+  public function indexAction($ws=null) {
+
+    $util = $this->get('mava_util');
+    $finishedTasks = $util->finishedTasks(1);
+
+    return $this->render(':dashboard:index.html.twig', array(
+      'finishedTasks' => $finishedTasks
+    ));
   }
 
 }

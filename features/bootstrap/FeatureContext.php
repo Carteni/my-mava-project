@@ -68,4 +68,25 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
   {
     throw new \Behat\Behat\Tester\Exception\PendingException();
   }
+
+    /**
+     * @Given I log in as Jack
+     */
+    public function iLogInAsJack()
+    {
+        //throw new \Behat\Behat\Tester\Exception\PendingException();
+      $this->visit('/login');
+      $this->fillField('username', 'Jack');
+      $this->fillField('password', 'jackpass');
+      $this->pressButton('_submit');
+    }
+
+    /**
+     * @Given I visit :arg1
+     */
+    public function iVisit($arg1)
+    {
+      $this->visit('/dashboard');
+        //throw new \Behat\Behat\Tester\Exception\PendingException();
+    }
 }

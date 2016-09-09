@@ -10,4 +10,11 @@ namespace AppBundle\Entity;
  */
 class ProjectRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function getAllProjects($workSpaceId) {
+    $q = $this->createQueryBuilder('p')
+      ->where('p.workspace = :workSpaceId')
+      ->setParameter('workSpaceId', $workSpaceId)
+      ->getQuery();
+    return $q->getResult();
+  }
 }
