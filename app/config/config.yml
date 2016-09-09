@@ -2,6 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    # Loaded in /src/AppBundle/DependencyInjection/AppExtension.php.
+    #- { resource: "@AppBundle/Resources/config/services.yml" }
     - { resource: "@MyBundle/Resources/config/services.yml" }
     - { resource: sonata_classification.yml }
 
@@ -240,3 +242,9 @@ sonata_media:
         local:
             directory:  "%kernel.root_dir%/../web/uploads/media"
             create:     false
+
+# Configure AppBundle (see /src/AppBundle/DependencyInjection/Configuation)
+app:
+    params:
+        param_1: 123
+        param_2: 'Bar'
