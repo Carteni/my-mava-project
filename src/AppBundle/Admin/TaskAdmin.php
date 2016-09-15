@@ -26,7 +26,9 @@ class TaskAdmin extends AbstractAdmin {
         ))
       ->add('project', 'entity', array(
         'class' => 'AppBundle\Entity\Project',
-        'choice_label' => 'title'
+        'choice_label' => 'title',
+        'placeholder' => '',
+        'empty_data'  => null
       ))
       ->add('user')
       ->add('status', ChoiceType::class, array(
