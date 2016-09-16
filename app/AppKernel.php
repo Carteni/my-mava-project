@@ -39,7 +39,7 @@ class AppKernel extends Kernel {
       // https://github.com/sonata-project/SonataMediaBundle/issues/783
       // https://github.com/sonata-project/SonataClassificationBundle/blob/3.x/Resources/doc/reference/installation.rst
       new \Sonata\ClassificationBundle\SonataClassificationBundle(),
-      new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
+      new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle()
     ];
 
     if (in_array($this->getEnvironment(), ['dev', 'test'], TRUE)) {
